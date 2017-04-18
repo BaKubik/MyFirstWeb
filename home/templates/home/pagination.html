@@ -1,0 +1,32 @@
+{% load staticfiles %}
+
+
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+
+    {% if page_obj.has_previous %}
+    <li class="disable">
+      <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+          {% ifequal num page_obj.number %}
+            <li class="active"><a href="{{ request.path }}?page={{ num }}"> {{ num }}</a></li>
+          {% else %}
+            <li class="disable"><a href="{{ request.path }}?page={{ num }}"> {{ num }}</a></li>
+          {% endifequal %}
+        {% endfor %}
+
+    {% if page_obj.has_next %}
+    <li>
+      <a href="{{ request.path }}?page={{ page_obj.next_page_number }}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    {% endif %}
+
+  </ul>
+</nav>

@@ -1,0 +1,24 @@
+{% extends "home/base.html" %}
+
+{% block title %} Share the post {% endblock %}
+
+{% block content %}
+    {% if sent %}
+
+        <div class="alert alert-success alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success!</strong> Successful mail sand.
+        </div>
+
+        <p>Sending post "{{ post_obj.title }}" to {{ cd.to }} complete.</p>
+    {% else %}
+        <p>Share "{{ post_obj.title }}" by e-mail</p>
+        <form class="form-horizontal" role="form" action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Send post be e-mail">
+        </form>
+    {% endif %}
+
+
+{% endblock %}
